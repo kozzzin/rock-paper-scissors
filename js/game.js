@@ -1,3 +1,8 @@
+const players = {
+    'you': 0,
+    'computer': 0
+}
+
 function computerPlay() {
     const choices = ['rock','paper','scissors'];
     const choice = Math.floor((Math.random() * 3));
@@ -10,11 +15,23 @@ function playRound(playerSelection, computerSelection) {
         playerSelection ==  'paper' && computerSelection == 'rock' ||
         playerSelection ==  'rock' && computerSelection == 'scissors'
     ) {
-        return `You win: ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`;
+        players['you'] += 1;
+        return;
+        // return `You win: ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}`;
     } else if (playerSelection == computerSelection) {
-        return `It's a tie. Both have ${playerSelection.toUpperCase()}`;
+        return;
+        // return `It's a tie. Both have ${playerSelection.toUpperCase()}`;
     }
-    return `You loose: ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}`;
+    players['computer'] += 1;
+    // return `You loose: ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}`;
+}
+
+function checkWinner() {
+    if (players['you'] == 5 || players['computer'] ==  5) {
+        if (players['you'] > players['computer']) return 'player';
+        return 'computer';
+    }
+    return false;
 }
 
 // function userInput() {
@@ -31,24 +48,24 @@ function playRound(playerSelection, computerSelection) {
 //     return output;
 // }
 
-function playGame(games) {
-    const score = [0,0];
-    for (let i = 0; i < games; i++) {
-        const playerSelection = userInput();
-        const computerSelection = computerPlay();
-        const result = playRound(playerSelection, computerSelection);
-        if (result.search(/win/gm) != -1) {
-            score[0] += 1;
-        } else if (result.search(/tie/gm) != -1) {
-            score[0] += 1;
-            score[1] += 1;
-        } else {
-            score[1] += 1;
-        }
-        console.log(result);
-    }
-    console.log(`GAME SCORE\nYou: ${score[0]} || Computer ${score[1]}`);
-}
+// function playGame(games) {
+//     const score = [0,0];
+//     for (let i = 0; i < games; i++) {
+//         const playerSelection = userInput();
+//         const computerSelection = computerPlay();
+//         const result = playRound(playerSelection, computerSelection);
+//         if (result.search(/win/gm) != -1) {
+//             score[0] += 1;
+//         } else if (result.search(/tie/gm) != -1) {
+//             score[0] += 1;
+//             score[1] += 1;
+//         } else {
+//             score[1] += 1;
+//         }
+//         console.log(result);
+//     }
+//     console.log(`GAME SCORE\nYou: ${score[0]} || Computer ${score[1]}`);
+// }
 
 
 // playGame(5);

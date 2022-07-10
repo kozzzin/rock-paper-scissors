@@ -9,19 +9,23 @@
     <script type="text/javascript" src="./js/game.js"></script>
 </head>
 <body>
-    <div id="score">
-        <p><strong>You: </strong><span id="you-score">0</span> | <strong>Computer: </strong><span id="computer-score">0</span></p>
+    <div id="score" class="hidden">
+        <div id="player-name">Player</div>
+        <div id="player-score"><span id="you-score">0</span></div>
+        <div id="comp-score"><span id="computer-score">0</span></div>
+        <div id="computer-name">Computer</div>
     </div>
     <div id="game-area">
-        <div id="you"><img src="./img/scissors.svg" /></div>
-        <div id="comp"><img src="./img/rock.svg" /></div>
+        <div id="start-game"><a href="#">New game</a></div>
+        <div id="you" class="hidden"><img src="./img/ready.svg" /></div>
+        <div id="comp"  class="hidden"><img src="./img/ready.svg" /></div>
     </div>
-    <div id="interface">     
+    <div id="interface" class="hidden">     
             <div class="player-choice" id="paper"></div>
             <div class="player-choice" id="rock"></div>
             <div class="player-choice" id="scissors"></div>
     </div>
-    <p>Thanks for icons <a href="https://openmoji.org/library/#author=Julian%20Gr%C3%BCneberg">Julian Gruneberg</a></a></p>
+    <!-- <p id="copy">Thanks for icons  <a href="https://openmoji.org/library/#author=Julian%20Gr%C3%BCneberg">Julian Gruneberg</a></a></p> -->
 
     <script>
 
@@ -29,14 +33,31 @@
 
         playerButtons.forEach((but) => {
             but.addEventListener('click', function(e) {
-                showChoice('you',e.target.getAttribute('id'));
-                showChoice('comp',computerPlay());
+                let compChoice = computerPlay();
+                let playerChoice = e.target.getAttribute('id');
+                showChoice('you',playerChoice);
+                showChoice('comp',compChoice);
+                playRound(playerChoice,compChoice);
+                document.querySelector('#you-score').textContent = players['you'];
+                document.querySelector('#computer-score').textContent = players['computer'];
+                let winner = checkWinner();
+                if (winner) {
+                    document.querySelector('#game-area').textContent = `${winner} wins`.toUpperCase();
+                    setTimeout(function(){
+                        location.reload();
+                    }, 7000);
+                }
             })
         });
 
         function showChoice(player, choice) {
             document.querySelector('#' + player).innerHTML = `<img src="./img/${choice}.svg">`;
         }
+
+        document.querySelector('#start-game').addEventListener('click', function(e) {
+            document.querySelectorAll('.hidden').forEach(e => e.classList.remove('hidden'));
+            this.classList.add('hidden');
+        });
 
     </script>
     
