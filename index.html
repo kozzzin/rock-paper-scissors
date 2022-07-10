@@ -9,6 +9,36 @@
     <script type="text/javascript" src="./js/game.js"></script>
 </head>
 <body>
+    <div id="score">
+        <p><strong>You: </strong><span id="you-score">0</span> | <strong>Computer: </strong><span id="computer-score">0</span></p>
+    </div>
+    <div id="game-area">
+        <div id="you"><img src="./img/scissors.svg" /></div>
+        <div id="comp"><img src="./img/rock.svg" /></div>
+    </div>
+    <div id="interface">     
+            <div class="player-choice" id="paper"></div>
+            <div class="player-choice" id="rock"></div>
+            <div class="player-choice" id="scissors"></div>
+    </div>
+    <p>Thanks for icons <a href="https://openmoji.org/library/#author=Julian%20Gr%C3%BCneberg">Julian Gruneberg</a></a></p>
+
+    <script>
+
+        const playerButtons = Array.from(document.querySelectorAll('.player-choice'));
+
+        playerButtons.forEach((but) => {
+            but.addEventListener('click', function(e) {
+                showChoice('you',e.target.getAttribute('id'));
+                showChoice('comp',computerPlay());
+            })
+        });
+
+        function showChoice(player, choice) {
+            document.querySelector('#' + player).innerHTML = `<img src="./img/${choice}.svg">`;
+        }
+
+    </script>
     
 </body>
 </html>

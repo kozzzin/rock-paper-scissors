@@ -17,19 +17,19 @@ function playRound(playerSelection, computerSelection) {
     return `You loose: ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}`;
 }
 
-function userInput() {
-    let output;
-    while(true) {
-        const input = prompt('Make your choice: ').toLowerCase();
-        if  (['rock','paper','scissors'].includes(input)) {
-            output = input;
-            break;
-        } else {
-            console.log(`${input} is not proper choice. Valide choices: 'rock','paper','scissors'`);
-        }
-    }
-    return output;
-}
+// function userInput() {
+//     let output;
+//     // while(true) {
+//     //     const input = prompt('Make your choice: ').toLowerCase();
+//     //     if  (['rock','paper','scissors'].includes(input)) {
+//     //         output = input;
+//     //         break;
+//     //     } else {
+//     //         console.log(`${input} is not proper choice. Valide choices: 'rock','paper','scissors'`);
+//     //     }
+//     // }
+//     return output;
+// }
 
 function playGame(games) {
     const score = [0,0];
@@ -51,7 +51,7 @@ function playGame(games) {
 }
 
 
-playGame(5);
+// playGame(5);
 
 
 
