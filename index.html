@@ -9,11 +9,13 @@
     <script type="text/javascript" src="./js/game.js"></script>
 </head>
 <body>
-    <div id="score" class="hidden">
-        <div id="player-name">Player</div>
-        <div id="player-score"><span id="you-score">0</span></div>
-        <div id="comp-score"><span id="computer-score">0</span></div>
-        <div id="computer-name">Computer</div>
+    <div id="score-container">
+        <div id="score" class="hidden">
+            <div id="player-name">Player</div>
+            <div id="player-score"><span id="you-score">0</span></div>
+            <div id="comp-score"><span id="computer-score">0</span></div>
+            <div id="computer-name">Computer</div>
+        </div>
     </div>
     <div id="game-area">
         <div id="start-game"><a href="#">New game</a></div>
@@ -25,41 +27,8 @@
             <div class="player-choice" id="rock"></div>
             <div class="player-choice" id="scissors"></div>
     </div>
-    <!-- <p id="copy">Thanks for icons  <a href="https://openmoji.org/library/#author=Julian%20Gr%C3%BCneberg">Julian Gruneberg</a></a></p> -->
+    <div id="copy">Thanks for icons  <a href="https://openmoji.org/library/#author=Julian%20Gr%C3%BCneberg">Julian Gruneberg</a></div>
 
-    <script>
 
-        const playerButtons = Array.from(document.querySelectorAll('.player-choice'));
-
-        playerButtons.forEach((but) => {
-            but.addEventListener('click', function(e) {
-                let compChoice = computerPlay();
-                let playerChoice = e.target.getAttribute('id');
-                showChoice('you',playerChoice);
-                showChoice('comp',compChoice);
-                playRound(playerChoice,compChoice);
-                document.querySelector('#you-score').textContent = players['you'];
-                document.querySelector('#computer-score').textContent = players['computer'];
-                let winner = checkWinner();
-                if (winner) {
-                    document.querySelector('#game-area').textContent = `${winner} wins`.toUpperCase();
-                    setTimeout(function(){
-                        location.reload();
-                    }, 7000);
-                }
-            })
-        });
-
-        function showChoice(player, choice) {
-            document.querySelector('#' + player).innerHTML = `<img src="./img/${choice}.svg">`;
-        }
-
-        document.querySelector('#start-game').addEventListener('click', function(e) {
-            document.querySelectorAll('.hidden').forEach(e => e.classList.remove('hidden'));
-            this.classList.add('hidden');
-        });
-
-    </script>
-    
 </body>
 </html>

@@ -34,6 +34,39 @@ function checkWinner() {
     return false;
 }
 
+document.addEventListener('DOMContentLoaded', function(event) {
+
+    const playerButtons = Array.from(document.querySelectorAll('.player-choice'));
+
+    playerButtons.forEach((but) => {
+        but.addEventListener('click', function(e) {
+            let compChoice = computerPlay();
+            let playerChoice = e.target.getAttribute('id');
+            showChoice('you',playerChoice);
+            showChoice('comp',compChoice);
+            playRound(playerChoice,compChoice);
+            document.querySelector('#you-score').textContent = players['you'];
+            document.querySelector('#computer-score').textContent = players['computer'];
+            let winner = checkWinner();
+            if (winner) {
+                document.querySelector('#game-area').textContent = `${winner} wins`.toUpperCase();
+                setTimeout(function(){
+                    location.reload();
+                }, 7000);
+            }
+        })
+    });
+
+    function showChoice(player, choice) {
+        document.querySelector('#' + player).innerHTML = `<img src="./img/${choice}.svg">`;
+    }
+
+    document.querySelector('#start-game').addEventListener('click', function(e) {
+        document.querySelectorAll('.hidden').forEach(e => e.classList.remove('hidden'));
+        this.classList.add('hidden');
+    });
+});
+
 // function userInput() {
 //     let output;
 //     // while(true) {
